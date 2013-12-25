@@ -41,5 +41,14 @@
                (if (zero? (count pos-threes))
                  (reverse (range 100 999))
                  (rest pos-threes)))))))
+
 ;;problem 5
 
+(def small-mult
+  (let [div-10 2520
+        inc-div-20? (fn [x]
+                      (= (count (filter #(zero? (rem n %)) (range 11 21))) 10))]
+    (loop [n div-20]
+      (if (true (inc-div-20? n))
+        x
+        (recur (+ div-10 n))))))
