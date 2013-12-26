@@ -52,3 +52,10 @@
       (if (true (inc-div-20? n))
         x
         (recur (+ div-10 n))))))
+
+;;problem 6
+
+(def square-sum-below-100
+  (let [sq-sum (reduce + (range 1 101))
+        sum-sq (reduce + (map #(* % %) (range 1 101)))]
+    (- (* sq-sum sq-sum) sum-sq)))
