@@ -2,6 +2,7 @@
 
 ;; problem 2
 
+
 (def even-fibs-sum-seq-four-mil
   (let [fib       (fn [x y]
                     (lazy-seq (cons y (fib y (+ x y)))))
@@ -20,7 +21,7 @@
                            (reverse (range 3 big-number 2)))))))
 
 ;;problem 4 ultra messy, but eh it works.
-
+ 
 (def palindromic-product 
   (let [pos-threes (range 100 999)
         is-six-palindrome (fn [x]
@@ -59,3 +60,11 @@
   (let [sq-sum (reduce + (range 1 101))
         sum-sq (reduce + (map #(* % %) (range 1 101)))]
     (- (* sq-sum sq-sum) sum-sq)))
+
+;;problem 7 read this one
+
+(defn sieve [potentials primes]
+  (if-let [p (first potentials)]
+    (recur (doall (filter #(not= (mod % p) 0) potentials)) (conj primes p))
+    primes))
+(nth (sieve (range 2 120000) []) 10000)
