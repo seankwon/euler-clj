@@ -27,3 +27,16 @@
   (if (<= (count series) 5)
     (apply max p)
     (recur (rest series) (cons (reduce * (take 5 series)) p))))
+
+;;problem 9, random brute forcing!!
+
+(def py-trip
+  (let [m (rand 100) n (rand 100)
+        sq (fn [x] (* x x))]
+    (loop [m m n n]
+      (let [a (- (sq m) (sq n))
+            b (* 2 m n)
+            c (+ (sq m) (sq n))]
+        (if (= 1000 (+ a b c))
+          (* a b c)
+          (recur (int (rand 100)) (int (rand 100))))))))
