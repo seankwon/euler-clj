@@ -1,4 +1,5 @@
 (ns euler.problems-2)
+(require '[clojure.set :as cset])
 
 ;;problem 8
 
@@ -40,3 +41,22 @@
         (if (= 1000 (+ a b c))
           (* a b c)
           (recur (int (rand 100)) (int (rand 100))))))))
+
+;;problem 10
+(defn aseq-sieve [n]
+  "Fast sieve using transient and disj!"
+  (let [sieve (transient (set (cons 2 (range 3 n 2))))
+        sq (fn [x] (* x x))]
+    (loop [s sieve f 3]
+      (if (> (sq f) n)
+        (persistent! s)
+        (recur (reduce disj! s (range (sq f) n f)) (inc f))))))
+
+;;problem 11
+
+
+;;problem 12
+
+(def triangle-seq
+  (lazy-seq
+   (map #(/ (* % (inc %)) 2) (iterate inc 1))))
