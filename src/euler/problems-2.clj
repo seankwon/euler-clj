@@ -60,3 +60,9 @@
 (def triangle-seq
   (lazy-seq
    (map #(/ (* % (inc %)) 2) (iterate inc 1))))
+
+(defn find-divs [n]
+  (* (count (filter #(= % 0) (map #(rem n %) (range 1 (int (inc (Math/sqrt n))))))) 2))
+
+(defn triangle-num-500-divs
+  (first (drop-while #(< (find-divs %) 500) triangle-seq)))
