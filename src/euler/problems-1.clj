@@ -32,7 +32,8 @@
         palindromes (filter is-six-palindrome? (reverse (range 100000 999999)))]
     (loop [palindrome palindromes pos-threes pos-threes]
       (if (and
-           (and (not (zero? (count palindrome))) (not (zero? (count pos-threes))))
+           (and (not (zero? (count palindrome))) 
+                (not (zero? (count pos-threes))))
            (zero? (rem (first palindrome) (first pos-threes))) 
            (<= (count (str (/ (first palindrome) (first pos-threes)))) 3))
         (first palindrome)
