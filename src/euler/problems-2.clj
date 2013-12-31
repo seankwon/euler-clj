@@ -198,3 +198,16 @@
   (long (binomial (+ a b) b)))
 
 (find-lattice-paths 20 20)
+
+;;problem 16
+
+(defn expo [n x]
+  (reduce *' (repeat x n)))
+
+(def all-nums (clojure.string/split (str (expo 2 1000)) #""))
+
+(def all-nums-list (map read-string (pop (apply list all-nums))))
+
+(reduce + all-nums-list)
+
+;;problem 17
