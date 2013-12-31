@@ -185,3 +185,16 @@
         collatz-seq (map collatz (range 1 1000000))
         longest-chain (.indexOf collatz-seq (apply max collatz-seq))])
   longest-chain)
+
+;;problem 15 lattice paths
+
+(defn binomial [n k]
+  (let [n-ex (reduce *' (range 1 (inc n)))
+        k-ex (reduce *' (range 1 (inc k)))
+        nk-ex (reduce *' (range 1 (inc (- n k))))]
+    (/ n-ex (*' k-ex nk-ex))))
+
+(defn find-lattice-paths [a b]
+  (long (binomial (+ a b) b)))
+
+(find-lattice-paths 20 20)
