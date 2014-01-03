@@ -210,4 +210,24 @@
 
 (reduce + all-nums-list)
 
-;;problem 17
+;;problem 17 I really hate this problem
+
+(defn convert-to-num-of-chars [aseq]
+  (reduce + (map count (map name aseq))))
+
+(def chars-ones (convert-to-num-of-chars '(:one :two :three :four :five :six :seven :eight :nine)))
+(def chars-teens (convert-to-num-of-chars
+                  '(:ten :eleven :twelve :thirteen :fourteen :fifteen :sixteen :seventeen :eighteen :nineteen)))
+(def chars-tens (convert-to-num-of-chars '(:twenty :thirty :forty :fifty :sixty :seventy :eighty :ninety)))
+(def chars-thousand (count "onethousand"))
+(def chars-hundred-and (count "hundredand"))
+(def chars-hundred (count "hundred"))
+
+(+ chars-ones chars-teens) ;;1-19
+(+ (* 8 chars-ones) (* 10 chars-tens)) ;;20-99
+(def one-through-ninetynine (+ chars-ones chars-teens (* 8 chars-ones) (* 10 chars-tens)))
+(def sum-of-letters (+ (* 9 chars-hundred)
+   (* chars-hundred-and (* 9 99))
+   (* chars-one 100)
+   (* one-through-ninetynine 10)
+   chars-thousand));;100-999
