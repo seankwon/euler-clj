@@ -45,3 +45,11 @@
 (def count-sundays (count (filter #(= 0 %) (find-suns century 0))))
 
 count-sundays
+
+;;problem 20
+
+(defn factorial [n]
+  (reduce *' (range 1 (inc n))))
+
+(def sum-digits
+  (reduce + (map #(. Integer parseInt %) (rest (list* (clojure.string/split (str (factorial 100)) #""))))))
