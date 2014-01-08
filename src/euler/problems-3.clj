@@ -18,9 +18,9 @@
            [4 62 98 27 23  9 70 98 73 93 38 53 60 4 23]])
 
 (defn merge-rows [a b]
-  (map + (map  #(apply max %) (partition 2 1 a)) b))
+  (map + (map #(apply max %) (partition 2 1 a)) b))
 
-(reduce merge-rows (reverse routes))
+(reduce merge-rows (reverse data))
 
 ;;problem 19
 ;;Jan 1st 1901 -> tuesday
@@ -31,6 +31,17 @@
     [31 28 31 30 31 30 31 31 30 31 30 31]))
 
 (def century
-  (map days-in-months (map #(zero? (mod % 4)) (range 1901 2001))))
+  (vec (flatten (map days-in-months (map #(zero? (mod % 4)) (range 1901 2001))))))
 
-(def days-in-year (map #(reduce + %) century))
+(defn find-first [coll index]
+  (mod (+ (nth coll index) (nth coll (inc index))) 7))
+
+(defn find-suns [coll index]
+  (lazy-seq
+   (when (not= index (dec (count coll)))
+     (let [first-m (find-first coll index)]
+       (cons first-m (find-suns (assoc coll (inc index) first-m) (inc index)))))))
+
+(def count-sundays (count (filter #(= 0 %) (find-suns century 0))))
+
+count-sundays
