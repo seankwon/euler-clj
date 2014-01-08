@@ -68,4 +68,5 @@
   (if-let [p (first potentials)]
     (recur (doall (filter #(not= (mod % p) 0) potentials)) (conj primes p))
     primes))
+
 (nth (sieve (range 2 120000) []) 10000)
