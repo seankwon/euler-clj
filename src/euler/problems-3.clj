@@ -57,3 +57,13 @@ count-sundays
 
 ;;problem 21
 
+(defn find-sum-divisors [n]
+  (reduce + (filter #(zero? (rem n %)) (range 1 (inc (int (/ n 2)))))))
+
+(defn is-amicable? [n]
+  (and (not= (find-sum-divisors n) n) (= n (find-sum-divisors (find-sum-divisors n)))))
+
+(defn find-amicable-pairs [end]
+  (filter is-amicable? (range 1 (inc end))))
+
+(def sum-amicable-pairs-to-10000 (reduce + (find-amicable-pairs 10000)))
