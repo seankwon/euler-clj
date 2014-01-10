@@ -52,4 +52,8 @@ count-sundays
   (reduce *' (range 1 (inc n))))
 
 (def sum-digits
-  (reduce + (map #(. Integer parseInt %) (rest (list* (clojure.string/split (str (factorial 100)) #""))))))
+  (reduce + (map #(. Integer parseInt %)
+                 (rest (list* (clojure.string/split (str (factorial 100)) #""))))))
+
+;;problem 21
+
