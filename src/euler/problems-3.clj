@@ -67,3 +67,26 @@ count-sundays
   (filter is-amicable? (range 1 (inc end))))
 
 (def sum-amicable-pairs-to-10000 (reduce + (find-amicable-pairs 10000)))
+
+;;problem 22
+(def letter-map (zipmap (map str (map char (range 65 91))) (range 1 27)))
+
+(def vec-names
+  (sort (conj
+   (pop (clojure.string/split (str (slurp "src/euler/names.txt")) #","))
+   "ALONSO")))
+
+(defn get-letters [s]
+  (rest (list* (clojure.string/split s #""))))
+
+(defn find-score [s]
+  (reduce + (map #(letter-map %) (get-letters s))))
+
+(def accumulate-scores
+  (let [vec->nestedvec (fn [a b] (vector a b))
+        rdc-score-indx (fn [a] (* (nth a 0) (nth a 1)))
+        names-scores (map find-score vec-names)
+        scores-size (inc (count names-scores))]
+    
+    (reduce + (map rdc-score-indx
+         (map vec->nestedvec names-scores (range 1 scores-size))))))
