@@ -89,4 +89,16 @@ count-sundays
         scores-size (inc (count names-scores))]
     
     (reduce + (map rdc-score-indx
-         (map vec->nestedvec names-scores (range 1 scores-size))))))
+                   (map vec->nestedvec names-scores (range 1 scores-size))))))
+
+;; Problem 23 Abundant sums
+
+(defn fs-find-divisors [n]
+  (filter #(= 0 (mod n %)) (range 2 n)))
+
+(defn is-abundant? [n]
+  (let [divisors (fs-find-divisors n)]
+    (if (= 1 (count divisors))
+      false (> (reduce + divisors) n))))
+
+(filter #(is-abundant? %) (range 2 29123))

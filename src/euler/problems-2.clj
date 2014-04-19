@@ -66,7 +66,7 @@
 (defn find-divs [n]
   (* (count (filter #(= % 0) (map #(rem n %) (range 1 (int (inc (Math/sqrt n))))))) 2))
 
-(defn triangle-num-500-divs
+(def triangle-num-500-divs
   (first (drop-while #(< (find-divs %) 500) triangle-seq)))
 
 ;;problem 13
