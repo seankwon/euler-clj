@@ -92,13 +92,27 @@ count-sundays
                    (map vec->nestedvec names-scores (range 1 scores-size))))))
 
 ;; Problem 23 Abundant sums
+(def limit 29123)
 
-(defn fs-find-divisors [n]
-  (filter #(= 0 (mod n %)) (range 2 n)))
+(defn fast-find-divisors [n]
+  "A faster way to find divisors by using the sqrt as limit"
+  (loop [newcoll '(1) i 2]
+    (if (= i (int (inc (Math/sqrt n))))
+      newcoll
+      (recur (if (= 0 (mod n i))
+               (conj newcoll i (/ n i))
+               newcoll)
+             (inc i)))))
 
 (defn is-abundant? [n]
-  (let [divisors (fs-find-divisors n)]
-    (if (= 1 (count divisors))
-      false (> (reduce + divisors) n))))
+  "Check if a num is abundant"
+  (let [divisors (fast-find-divisors n)]
+    (> (reduce + divisors) n)))
 
-(filter #(is-abundant? %) (range 2 29123))
+(defn abundant-nums [n]
+  "list of abundant nums til n"
+  (filter #(is-abundant? %) (range 2 n 2)))
+
+(def not-abundant-nums [n]
+  "list of non abundant nums til n"
+  (filter #(not (is-abundant? %)) (range 1 n 3)))
